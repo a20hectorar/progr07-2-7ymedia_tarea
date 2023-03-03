@@ -14,7 +14,7 @@ import juegos.recursos.Carta;
 public class Jugador {
     private Carta cartas;
     private String nombre;
-    private int credito;
+    private int credito=1000;
     
     public Jugador(String nombre){
     }
