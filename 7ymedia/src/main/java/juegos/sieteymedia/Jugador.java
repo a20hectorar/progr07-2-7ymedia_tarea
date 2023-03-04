@@ -4,7 +4,7 @@
  */
 package juegos.sieteymedia;
 
-import juegos.recursos;
+
 import juegos.recursos.Carta;
 
 /**
