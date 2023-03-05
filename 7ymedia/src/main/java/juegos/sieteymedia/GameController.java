@@ -14,16 +14,14 @@ import juegos.recursos.Carta;
 public class GameController {
     private Baraja baraja;
     private Jugador jugador;
-    
+    static int valores[]={1,2,3,4,5,6,7,10,11,12};
+    static String paloBaraja[]={"Espadas","Oros","Copas","Bastos"};
     
     
     public static void main(String[] args){
-        int valores[]={1,2,3,4,5,6,7,10,11,12};
-        String paloBaraja[]={"Espadas","Oros","Copas","Bastos"};
         
         String palo=paloAleatorio(paloBaraja[]);
         int valor=valorAleatorio(valores[]);
-        
         Carta otraCarta=new Carta(palo,valor);
     }
     
@@ -31,14 +29,14 @@ public class GameController {
         }
     
     
-    public String paloAleatorio(String array[]){
+    public static String paloAleatorio(String[] array){
         int tamañoArray=array.length;
         Random random=new Random();
         int indiceArray=random.nextInt(tamañoArray);
         return array[indiceArray];
     }
     
-    public int valorAleatorio(int array[]){
+    public static int valorAleatorio(int[] array){
         int tamañoArray=array.length;
         Random random=new Random();
         int indiceArray=random.nextInt(tamañoArray);

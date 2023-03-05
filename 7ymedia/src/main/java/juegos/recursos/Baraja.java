@@ -16,12 +16,15 @@ public class Baraja {
     }
     
     public Carta[] cartasDadas(){
+        return null;
     }
     
     public Carta[] cartasMazo(){
+        return null;
     }
     
     public Carta[] daCartas(int valorCarta){
+        return null;
     }
     
     public void reiniciaBaraja(){
