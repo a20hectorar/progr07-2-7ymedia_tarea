@@ -4,7 +4,7 @@
  */
 package juegos.sieteymedia;
 
-import juegos.recursos;
+
 import juegos.recursos.Carta;
 
 /**
@@ -27,9 +27,10 @@ public class Jugador {
     }
     
     public int actualizaCredito(int credito){
+        return 0;
     }
     
-    public void nuevaCarta(Carta){
+    public void nuevaCarta(Carta nuevaCarta){
     }
     
     public void reiniciaMano(){
