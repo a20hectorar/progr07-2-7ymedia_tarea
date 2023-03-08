@@ -12,7 +12,7 @@ import juegos.recursos.Carta;
  * @author Hector
  */
 public class Jugador {
-    private Carta cartas[];
+    private Carta cartasJugador[];
     private String nombre;
     private int credito=1000;
     
@@ -21,27 +21,34 @@ public class Jugador {
     }
     
     public Jugador(String nombre,int credito){
-    }
-    
-    public String getNombre() {
-        return nombre;
+        this.nombre=nombre;
+        this.credito=credito;
     }
 
-    public int getCredito() {
+    public Carta[] getCartas() {
+        return cartasJugador;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public int actualizaCredito(int cantidad){
+        credito+=cantidad;
         return credito;
     }
     
-    public Carta getCartas() {
-        return cartas;
-    }
-    
-    public int actualizaCredito(int credito){
-        return 0;
-    }
-    
     public void nuevaCarta(Carta nuevaCarta){
+        for(int i=0;i<cartasJugador.length;i++){
+            if(cartasJugador[i]!=null){
+                cartasJugador[i]=nuevaCarta;
+            }
+        }
     }
     
     public void reiniciaMano(){
+        for(int i=0;i<cartasJugador.length;i++){
+            cartasJugador[i]=null;
+        }
     }
 }

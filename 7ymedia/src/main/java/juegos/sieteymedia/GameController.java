@@ -49,7 +49,7 @@ public class GameController {
                            - En caso de que uno de los dos saque 7 y media, se pagar\u00e1 el doble
                            - En caso de quedarte sin cr\u00e9dito, el juego finalizar\u00e1""");*/
         
-        System.out.println("Tu crédito actual es de : " + jugador1.getCredito() + " créditos.");
+        System.out.println("Tu crédito actual es de : " + jugador1.actualizaCredito(0) + " créditos.");
         System.out.println("Empecemos!!!");
         
         System.out.println("¿Cuánto deseas apostar? (min: 10 créditos)");
