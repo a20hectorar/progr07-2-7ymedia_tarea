@@ -19,23 +19,13 @@ public class Carta {
         this.valorCarta = valorCarta;
     }
 
+    Carta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getValorCarta() {
         return valorCarta;
     }
-
-    public void setValorCarta(int valorCarta) {
-        this.valorCarta = valorCarta;
-    }
-
     
-    public String getPalo() {
-        return palo;
-    }
-
-    public void setPalo(String palo) {
-        this.palo = palo;
-    }
-    
-    
-    
+        
 }

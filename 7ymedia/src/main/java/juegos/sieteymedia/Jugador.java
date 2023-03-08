@@ -12,16 +12,25 @@ import juegos.recursos.Carta;
  * @author Hector
  */
 public class Jugador {
-    private Carta cartas;
+    private Carta cartas[];
     private String nombre;
     private int credito=1000;
     
     public Jugador(String nombre){
+        this.nombre=nombre;
     }
     
     public Jugador(String nombre,int credito){
     }
+    
+    public String getNombre() {
+        return nombre;
+    }
 
+    public int getCredito() {
+        return credito;
+    }
+    
     public Carta getCartas() {
         return cartas;
     }
