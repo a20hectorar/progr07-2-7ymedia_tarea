@@ -11,18 +11,19 @@ import java.util.Random;
  * @author Hector
  */
 public class Baraja {
-    private Carta cartas[];
+    private final Carta[] cartas=creaBaraja();
     private int puntero=39;
     
-    public Carta[] creaBaraja(Carta cartas[]){
+    public static Carta[] creaBaraja(){
+        Carta baraja[] = null;
         String palos[]={"E","O","C","B"};
         int valores[]={1,2,3,4,5,6,7,10,11,12};
-        for(int i=0;i<cartas.length;i++){
-            Carta generaCarta;
-            generaCarta = new Carta(palos[i],valores[i]);
-            cartas[i]=generaCarta;
-        }
-        return cartas;
+            for(int i=0,j=0;i<10 && j<4;i++,j++){
+                Carta generaCarta;
+                generaCarta = new Carta(palos[j],valores[i]);
+                baraja[i]=generaCarta;
+            }
+        return baraja;
     }
     
     private void barajaCartas() {

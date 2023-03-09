@@ -14,7 +14,7 @@ import juegos.recursos.Carta;
 public class Jugador {
     private Carta cartasJugador[];
     private String nombre;
-    private int credito=1000;
+    private static int credito=1000;
     
     public Jugador(String nombre){
         this.nombre=nombre;
@@ -33,7 +33,7 @@ public class Jugador {
         return nombre;
     }
     
-    public int actualizaCredito(int cantidad){
+    public static int actualizaCredito(int cantidad){
         credito+=cantidad;
         return credito;
     }

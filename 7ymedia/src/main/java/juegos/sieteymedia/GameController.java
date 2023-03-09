@@ -15,15 +15,27 @@ import juegos.recursos.Carta;
 public class GameController {
     private Baraja baraja;
     private Jugador jugador;
+
     
     
     
     
     public static void main(String[] args){
+        boolean manoInicial=true;
+        int apuestaTotal=0;
+        int nuevaApuesta;
         
-        int apuestaActual;
+        
+        /*public static Carta[] creaBaraja(Carta cartas[]){
+        String palos[]={"E","O","C","B"};
         int valores[]={1,2,3,4,5,6,7,10,11,12};
-        String paloBaraja[]={"Espadas","Oros","Copas","Bastos"};
+            for(int i=0;i<cartas.length;i++){
+                Carta generaCarta;
+                generaCarta = new Carta(palos[i],valores[i]);
+                cartas[i]=generaCarta;
+            }
+        return cartas;
+        }*/
         
         Scanner sc=new Scanner(System.in);
         
@@ -53,13 +65,20 @@ public class GameController {
         System.out.println("Empecemos!!!");
         
         System.out.println("¿Cuánto deseas apostar? (min: 10 créditos)");
-        apuestaActual=sc.nextInt();
-        sc.nextLine();
-        //Damos nueva carta al jugador
-        String palo=paloAleatorio(paloBaraja);
-        int valor=valorAleatorio(valores);
         
-        Carta otraCarta=new Carta(palo,valor);
+        nuevaApuesta=sc.nextInt();
+        sc.nextLine();
+        
+        apuestaTotal+=nuevaApuesta;
+        
+        int actualizaCredito = Jugador.actualizaCredito(nuevaApuesta);
+        
+        System.out.println("Tus cartas son: ");
+        
+    
+    
+    
+       
         
         
     }
