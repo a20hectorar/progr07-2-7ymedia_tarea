@@ -15,6 +15,8 @@ public class Jugador {
     private Carta cartasJugador[]=new Carta[8];
     private String nombre;
     private int credito=1000;
+    private double puntuacionJugador;
+    
     
     public Jugador(String nombre){
         this.nombre=nombre;
@@ -42,6 +44,7 @@ public class Jugador {
         for(int i=0;i<cartasJugador.length;i++){
             if(cartasJugador[i]!=null){
                 cartasJugador[i]=nuevaCarta;
+                puntuacionJugador();
             }
         }
     }
@@ -60,32 +63,43 @@ public class Jugador {
     
     public void imprimirCartas(){
         String nombreCarta;
-        double puntuacionCarta=0;
             for(Carta carta:cartasJugador){
                 
                 switch (carta.getValorCarta()){
                     case 10:
                         nombreCarta="S";
-                        puntuacionCarta+=0.5;
                         break;
                     case 11:
                         nombreCarta="C";
-                        puntuacionCarta+=0.5;
                         break;
                     case 12:
                         nombreCarta="R";
-                        puntuacionCarta+=0.5;
                         break;
                     default:
                         nombreCarta=Integer.toString(carta.getValorCarta());
-                        puntuacionCarta+=carta.getValorCarta();
                         break;
                 }
                 System.out.print("[" + carta.getPalo() + ":" + nombreCarta + "]/n");
         }
-            System.out.println("Valor jugada: " + puntuacionCarta);
-        if(puntuacionCarta>7.5){
-            System.out.println("¡Te pasaste! Lo siento, has perdido.");
+            System.out.println("Valor jugada: " + puntuacionJugador);
+    }
+    
+    private void puntuacionJugador(){
+        for(Carta carta:cartasJugador){
+            switch (carta.getValorCarta()){
+                    case 10:
+                        puntuacionJugador+=0.5;
+                        break;
+                    case 11:
+                        puntuacionJugador+=0.5;
+                        break;
+                    case 12:
+                        puntuacionJugador+=0.5;
+                        break;
+                    default:
+                        puntuacionJugador+=carta.getValorCarta();
+                        break;
+                }
         }
     }
 }

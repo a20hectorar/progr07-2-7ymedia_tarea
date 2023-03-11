@@ -64,6 +64,8 @@ public class GameController {
         System.out.println("Tu crédito actual es de : " + jugador1.actualizaCredito(0) + " créditos.");
         System.out.println("Empecemos!!!");
         
+        
+        
         System.out.println("¿Cuánto deseas apostar? (min: 10 créditos)");
         
         nuevaApuesta=sc.nextInt();
