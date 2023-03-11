@@ -71,11 +71,26 @@ public class GameController {
         
         apuestaTotal+=nuevaApuesta;
         
-        int actualizaCredito = Jugador.actualizaCredito(nuevaApuesta);
+        int actualizaCredito = jugador1.actualizaCredito(-nuevaApuesta);
         
         System.out.println("Tus cartas son: ");
         
-    
+        Baraja baraja=new Baraja();
+        
+        jugador1.setCartas(baraja.daCartas(1));
+        
+        jugador1.imprimirCartas();
+
+        System.out.println("Tu apuesta total en la jugada es de: " + apuestaTotal + " créditos.");
+        System.out.println("¿Pides [C]arta o te [P]lantas?");
+        
+        if(sc.nextLine().equals('C')){
+            
+        }else if(sc.nextLine().equals('P')){
+            
+        }
+        
+        
     
     
        

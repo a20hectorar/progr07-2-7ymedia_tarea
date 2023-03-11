@@ -12,9 +12,9 @@ import juegos.recursos.Carta;
  * @author Hector
  */
 public class Jugador {
-    private Carta cartasJugador[];
+    private Carta cartasJugador[]=new Carta[8];
     private String nombre;
-    private static int credito=1000;
+    private int credito=1000;
     
     public Jugador(String nombre){
         this.nombre=nombre;
@@ -33,9 +33,9 @@ public class Jugador {
         return nombre;
     }
     
-    public static int actualizaCredito(int cantidad){
-        credito+=cantidad;
-        return credito;
+    public  int actualizaCredito(int cantidad){
+        this.credito+=cantidad;
+        return this.credito;
     }
     
     public void nuevaCarta(Carta nuevaCarta){
@@ -46,9 +46,46 @@ public class Jugador {
         }
     }
     
+     public void setCartas(Carta[]cartaLista){
+        for(Carta c: cartaLista){
+            nuevaCarta(c);
+        }
+    }
+    
     public void reiniciaMano(){
         for(int i=0;i<cartasJugador.length;i++){
             cartasJugador[i]=null;
+        }
+    }
+    
+    public void imprimirCartas(){
+        String nombreCarta;
+        double puntuacionCarta=0;
+            for(Carta carta:cartasJugador){
+                
+                switch (carta.getValorCarta()){
+                    case 10:
+                        nombreCarta="S";
+                        puntuacionCarta+=0.5;
+                        break;
+                    case 11:
+                        nombreCarta="C";
+                        puntuacionCarta+=0.5;
+                        break;
+                    case 12:
+                        nombreCarta="R";
+                        puntuacionCarta+=0.5;
+                        break;
+                    default:
+                        nombreCarta=Integer.toString(carta.getValorCarta());
+                        puntuacionCarta+=carta.getValorCarta();
+                        break;
+                }
+                System.out.print("[" + carta.getPalo() + ":" + nombreCarta + "]/n");
+        }
+            System.out.println("Valor jugada: " + puntuacionCarta);
+        if(puntuacionCarta>7.5){
+            System.out.println("¡Te pasaste! Lo siento, has perdido.");
         }
     }
 }
