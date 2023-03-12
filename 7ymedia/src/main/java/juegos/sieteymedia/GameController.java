@@ -3,47 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package juegos.sieteymedia;
+import static java.lang.System.exit;
 import java.util.Random;
 import java.util.Scanner;
 import juegos.recursos.Baraja;
-import juegos.recursos.Carta;
 
 /**
  *
  * @author Hector
  */
 public class GameController {
-    private Baraja baraja;
-    private Jugador jugador;
-
+    private static Baraja baraja;
+    private static Jugador jugador;
+    static int actualizaCredito;
+    static boolean plantarse=false;
+    static int apuestaTotal=0;
     
-    
-    
-    
-    public static void main(String[] args){
-        boolean manoInicial=true;
-        int apuestaTotal=0;
-        int nuevaApuesta;
-        
-        
-        /*public static Carta[] creaBaraja(Carta cartas[]){
-        String palos[]={"E","O","C","B"};
-        int valores[]={1,2,3,4,5,6,7,10,11,12};
-            for(int i=0;i<cartas.length;i++){
-                Carta generaCarta;
-                generaCarta = new Carta(palos[i],valores[i]);
-                cartas[i]=generaCarta;
-            }
-        return cartas;
-        }*/
-        
+    public static void main(String[] args){       
+        int nuevaApuesta;      
         Scanner sc=new Scanner(System.in);
         
         System.out.println("¿Cómo te llamas");
         
-        Jugador jugador1=new Jugador(sc.nextLine());
+        jugador=new Jugador(sc.nextLine());
         
-        System.out.println("Bienvenido, " + jugador1.getNombre() + ". ¡Vamos a jugar!");
+        System.out.println("Bienvenido, " + jugador.getNombre() + ". ¡Vamos a jugar!");
         /*System.out.println("""
                            Pero antes, las reglas:
                            - Yo har\u00e9 de banca
@@ -61,38 +45,72 @@ public class GameController {
                            - En caso de que uno de los dos saque 7 y media, se pagar\u00e1 el doble
                            - En caso de quedarte sin cr\u00e9dito, el juego finalizar\u00e1""");*/
         
-        System.out.println("Tu crédito actual es de : " + jugador1.actualizaCredito(0) + " créditos.");
-        System.out.println("Empecemos!!!");
-        
-        
-        
-        System.out.println("¿Cuánto deseas apostar? (min: 10 créditos)");
-        
-        nuevaApuesta=sc.nextInt();
-        sc.nextLine();
-        
-        apuestaTotal+=nuevaApuesta;
-        
-        int actualizaCredito = jugador1.actualizaCredito(-nuevaApuesta);
-        
-        System.out.println("Tus cartas son: ");
-        
-        Baraja baraja=new Baraja();
-        
-        jugador1.setCartas(baraja.daCartas(1));
-        
-        jugador1.imprimirCartas();
+        mostrarMensajeInicio(jugador.actualizaCredito(0));
+        baraja=new Baraja();               
+        while(plantarse==false){
+            System.out.println("¿Cuánto deseas apostar? (min: 10 créditos)");
 
-        System.out.println("Tu apuesta total en la jugada es de: " + apuestaTotal + " créditos.");
-        System.out.println("¿Pides [C]arta o te [P]lantas?");
-        
-        if(sc.nextLine().equals('C')){
+            nuevaApuesta=sc.nextInt();
+            sc.nextLine();
+            while(nuevaApuesta<10){
+                System.out.println("¿Cuánto deseas apostar? (min: 10 créditos)");
+                nuevaApuesta=sc.nextInt();
+                sc.nextLine();
+            }
+
+            apuestaTotal+=nuevaApuesta;
+
+            actualizaCredito = jugador.actualizaCredito(-nuevaApuesta);
+
+            System.out.println("Tus cartas son: ");           
+
+            jugador.setCartas(baraja.daCartas(1));
+
+            jugador.imprimirCartas();
+
+            System.out.println("Tu apuesta total en la jugada es de: " + apuestaTotal + " créditos.");
             
-        }else if(sc.nextLine().equals('P')){
+            if(jugador.getPuntuacionJugador()>7.5){
+                System.out.println("¡Te pasaste, yo gano!");                            
+                plantarse(sc);               
+            }else{
             
+            System.out.println("¿Pides [C]arta o te [P]lantas?");
+            
+            String entrada=sc.nextLine();
+            String opcion=entrada.toLowerCase();
+            while(!opcion.equals("p") && !opcion.equals("c")){
+                System.out.println("¿Pides [C]arta o te [P]lantas?");
+                entrada=sc.nextLine();
+                opcion=entrada.toLowerCase();
+            }
+            
+            if(opcion.equals("p")){
+                plantarse=true;
+                Jugador banca=new Jugador("banca");
+                juegaMano(apuestaTotal,banca);
+                
+                if(banca.getPuntuacionJugador()>7.5){
+                    System.out.println("¡Me pasé, tú ganas!");
+                    actualizaCredito = jugador.actualizaCredito(apuestaTotal*2);                 
+                    plantarse(sc);
+                   
+                }else if(banca.getPuntuacionJugador()>jugador.getPuntuacionJugador()){
+                    System.out.println("Ohhhh!!! Yo gano!");
+                    //jugador.actualizaCredito(-apuestaTotal);              
+                    plantarse(sc);
+                    
+                }else if(banca.getPuntuacionJugador()<jugador.getPuntuacionJugador()){
+                    System.out.println("Tú ganas!!");
+                    actualizaCredito = jugador.actualizaCredito(apuestaTotal*2);                    
+                    plantarse(sc);
+                }
+                
+            }
+            
+            }
         }
-        
-        
+System.out.println("Enhorabuena, " + jugador.getNombre() + "! Has ganado " + jugador.actualizaCredito(0) + " créditos");
     
     
        
@@ -100,8 +118,16 @@ public class GameController {
         
     }
     
-    public void juegaMano(int valorCarta){
-        }
+    public static void juegaMano(int apuestaTotal,Jugador banca){
+
+            while(banca.getPuntuacionJugador()<jugador.getPuntuacionJugador()){
+                banca.setCartas(baraja.daCartas(1));
+                banca.imprimirCartas();
+            }
+
+                                  
+     }
+ 
     
     
     public static String paloAleatorio(String[] array){
@@ -118,5 +144,27 @@ public class GameController {
         return array[indiceArray];
     }
     
-       
+    private static void mostrarMensajeInicio(int actualizaCredito){
+        System.out.println("Tu crédito actual es de : " + actualizaCredito + " créditos.");
+        System.out.println("Empecemos!!!");
+    }
+    
+    public static void plantarse(Scanner sc){
+        System.out.println("¿Quieres continuar? [S/N]");
+        String opcion=sc.nextLine().toLowerCase();
+        
+        while(!opcion.equals("s") && !opcion.equals("n")){
+                    System.out.println("Introduzca \"n\" o \"s\"");
+                    opcion=sc.nextLine().toLowerCase();
+        }
+        if(opcion.equals("s")){
+            apuestaTotal=0;
+            mostrarMensajeInicio(actualizaCredito);
+            baraja.reiniciaBaraja();
+            jugador.reiniciaMano();
+            plantarse=false;
+        }else{
+            exit(0);
+        }
+    }
 }

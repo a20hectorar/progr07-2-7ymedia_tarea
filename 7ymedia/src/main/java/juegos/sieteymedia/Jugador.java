@@ -15,7 +15,6 @@ public class Jugador {
     private Carta cartasJugador[]=new Carta[8];
     private String nombre;
     private int credito=1000;
-    private double puntuacionJugador;
     
     
     public Jugador(String nombre){
@@ -27,6 +26,11 @@ public class Jugador {
         this.credito=credito;
     }
 
+    public double getPuntuacionJugador() {
+        return puntuacionJugador();
+    }   
+    
+    
     public Carta[] getCartas() {
         return cartasJugador;
     }
@@ -42,11 +46,11 @@ public class Jugador {
     
     public void nuevaCarta(Carta nuevaCarta){
         for(int i=0;i<cartasJugador.length;i++){
-            if(cartasJugador[i]!=null){
-                cartasJugador[i]=nuevaCarta;
-                puntuacionJugador();
+            if(cartasJugador[i]==null){
+                cartasJugador[i]=nuevaCarta;           
+                break;
             }
-        }
+        }            
     }
     
      public void setCartas(Carta[]cartaLista){
@@ -63,8 +67,8 @@ public class Jugador {
     
     public void imprimirCartas(){
         String nombreCarta;
-            for(Carta carta:cartasJugador){
-                
+        for(Carta carta:cartasJugador){
+            if(carta!=null) {   
                 switch (carta.getValorCarta()){
                     case 10:
                         nombreCarta="S";
@@ -79,27 +83,32 @@ public class Jugador {
                         nombreCarta=Integer.toString(carta.getValorCarta());
                         break;
                 }
-                System.out.print("[" + carta.getPalo() + ":" + nombreCarta + "]/n");
+                System.out.print("[" + carta.getPalo() + ":" + nombreCarta + "]\n");
         }
-            System.out.println("Valor jugada: " + puntuacionJugador);
+        }
+            System.out.println("Valor jugada: " + puntuacionJugador());
     }
     
-    private void puntuacionJugador(){
+    private double puntuacionJugador(){
+        double puntuacionJugador=0;
         for(Carta carta:cartasJugador){
-            switch (carta.getValorCarta()){
-                    case 10:
-                        puntuacionJugador+=0.5;
-                        break;
-                    case 11:
-                        puntuacionJugador+=0.5;
-                        break;
-                    case 12:
-                        puntuacionJugador+=0.5;
-                        break;
-                    default:
-                        puntuacionJugador+=carta.getValorCarta();
-                        break;
-                }
+            if(carta!=null) {  
+                switch (carta.getValorCarta()){
+                        case 10:
+                            puntuacionJugador+=0.5;
+                            break;
+                        case 11:
+                            puntuacionJugador+=0.5;
+                            break;
+                        case 12:
+                            puntuacionJugador+=0.5;
+                            break;
+                        default:
+                            puntuacionJugador+=carta.getValorCarta();
+                            break;
+                    }
+            }
         }
+        return puntuacionJugador;
     }
 }

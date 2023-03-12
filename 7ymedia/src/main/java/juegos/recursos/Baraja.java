@@ -24,11 +24,16 @@ public class Baraja {
         Carta baraja[] = new Carta[40];
         String palos[]={"Espadas","Oros","Copas","Bastos"};
         int valores[]={1,2,3,4,5,6,7,10,11,12};
-            for(int i=0,j=0;i<10 && j<4;i++,j++){
-                Carta generaCarta;
-                generaCarta = new Carta(palos[j],valores[i]);
-                baraja[i]=generaCarta;
+        int k=0;
+        for(int i=0;i<10;i++){
+            for(int j=0;j<4;j++){
+            Carta generaCarta;
+            generaCarta = new Carta(palos[j],valores[i]);
+            baraja[k]=generaCarta;
+            k++;
             }
+        }
+            
         return baraja;
     }
     
@@ -43,7 +48,7 @@ public class Baraja {
     }
     
     public Carta[] cartasDadas(){
-        Carta[] cartasDadas=null;
+        Carta[] cartasDadas=new Carta[40];
             for(int i=39,j=0;i>puntero;i--,j++){
                 cartasDadas[j]=cartas[puntero];
             }
@@ -51,7 +56,7 @@ public class Baraja {
     }
     
     public Carta[] cartasMazo(){
-        Carta[] cartasMazo=null;
+        Carta[] cartasMazo=new Carta[40];
             for(int i=0;i<=puntero;i++){
                 cartasMazo[i]=cartas[i];
             }
@@ -59,7 +64,7 @@ public class Baraja {
     }
     
     public Carta[] daCartas(int numeroCartas){
-        Carta[] nuevasCartas = null;
+        Carta[] nuevasCartas = new Carta[numeroCartas];
             for(int i=0;i<numeroCartas;i++,puntero--){
                 nuevasCartas[i]=cartas[puntero];
             }
@@ -68,6 +73,7 @@ public class Baraja {
     
     
     public void reiniciaBaraja(){
+        barajaCartas();
         puntero=39;
      }
 }
