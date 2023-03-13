@@ -92,17 +92,28 @@ public class GameController {
                 
                 if(banca.getPuntuacionJugador()>7.5){
                     System.out.println("¡Me pasé, tú ganas!");
-                    actualizaCredito = jugador.actualizaCredito(apuestaTotal*2);                 
+                    if(jugador.getPuntuacionJugador()!=7.5){
+                        actualizaCredito = jugador.actualizaCredito(apuestaTotal*2);
+                    }else{
+                        actualizaCredito = jugador.actualizaCredito(apuestaTotal*3);
+                    }                 
                     plantarse(sc);
                    
-                }else if(banca.getPuntuacionJugador()>jugador.getPuntuacionJugador()){
+                }else if(banca.getPuntuacionJugador()>=jugador.getPuntuacionJugador()){
                     System.out.println("Ohhhh!!! Yo gano!");
-                    //jugador.actualizaCredito(-apuestaTotal);              
+                    //jugador.actualizaCredito(-apuestaTotal);
+                    if(banca.getPuntuacionJugador()==7.5){
+                        actualizaCredito = jugador.actualizaCredito(-apuestaTotal);
+                    }
                     plantarse(sc);
                     
                 }else if(banca.getPuntuacionJugador()<jugador.getPuntuacionJugador()){
                     System.out.println("Tú ganas!!");
-                    actualizaCredito = jugador.actualizaCredito(apuestaTotal*2);                    
+                    if(jugador.getPuntuacionJugador()!=7.5){
+                        actualizaCredito = jugador.actualizaCredito(apuestaTotal*2);
+                    }else{
+                        actualizaCredito = jugador.actualizaCredito(apuestaTotal*3);
+                    }
                     plantarse(sc);
                 }
                 
@@ -110,7 +121,7 @@ public class GameController {
             
             }
         }
-System.out.println("Enhorabuena, " + jugador.getNombre() + "! Has ganado " + jugador.actualizaCredito(0) + " créditos");
+
     
     
        
@@ -164,6 +175,9 @@ System.out.println("Enhorabuena, " + jugador.getNombre() + "! Has ganado " + jug
             jugador.reiniciaMano();
             plantarse=false;
         }else{
+            if(jugador.getCredito()>1000){
+                System.out.println("Enhorabuena, " + jugador.getNombre() + "! Has ganado " + jugador.actualizaCredito(0) + " créditos");
+            }
             exit(0);
         }
     }

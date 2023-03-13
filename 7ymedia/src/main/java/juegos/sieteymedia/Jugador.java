@@ -38,6 +38,10 @@ public class Jugador {
     public String getNombre(){
         return nombre;
     }
+
+    public int getCredito() {
+        return credito;
+    }
     
     public  int actualizaCredito(int cantidad){
         this.credito+=cantidad;
