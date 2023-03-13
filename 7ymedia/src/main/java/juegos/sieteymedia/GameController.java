@@ -155,22 +155,7 @@ public class GameController {
                 banca.imprimirCartas();
             }                          
      }
-     
-    
-    /*public static String paloAleatorio(String[] array){
-        int tamañoArray=array.length;
-        Random random=new Random();
-        int indiceArray=random.nextInt(tamañoArray);
-        return array[indiceArray];
-    }
-    
-    public static int valorAleatorio(int[] array){
-        int tamañoArray=array.length;
-        Random random=new Random();
-        int indiceArray=random.nextInt(tamañoArray);
-        return array[indiceArray];
-    }*/
-    
+        
     /**
      * Este método muestra el mensaje inicial del juego al empezar la partida
      * @param actualizaCredito el crédito actualizado
